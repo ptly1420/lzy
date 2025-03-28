@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title><style>
+        :root {--primary-color: #e9b362;--secondary-color: #3c4250;
+            --text-color: #333;--light-text: #fff;
+            --bg-color: #f9f9f9;
+            --section-bg: #eaeff5;
+            --heading-bg: #3c4250;
+            --border-radius: 4px;--box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg:2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+        }body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .resume-container {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* 左侧边栏 */
+        .sidebar {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: var(--spacing-md);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .photo {width: 170px;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid var(--light-text);
+        }
+
+        .name-title {
+            text-align: center;
+            font-size: 1.8rem;margin: var(--spacing-sm) 0 var(--spacing-lg);font-weight: bold;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            margin: var(--spacing-md) 0 var(--spacing-sm);
+            font-weight: bold;
+            border-radius: var(--border-radius);}
+
+        .info-list {
+            list-style: none;
+            margin-bottom: var(--spacing-sm);}
+
+        .info-item {
+            display: flex;
+            align-items: center;margin-bottom: var(--spacing-xs);
+        }
+
+        .info-item i {
+            margin-right: var(--spacing-sm);
+            width: 20px;}
+
+        .self-assessment {
+            margin-top: auto;
+            padding-bottom: var(--spacing-md);
+        }
+
+        .self-assessment p {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* 右侧内容区 */
+        .content {
+            background-color: white;
+            padding: var(--spacing-md);
+        }
+
+        .content-section {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);}
+
+        .section-header h2 {
+            color: var(--secondary-color);
+            margin-right: var(--spacing-sm);
+        }
+
+        .section-header span {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .section-background {
+            background-color: var(--heading-bg);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            border-radius: var(--border-radius);display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-background span {
+            color: var(--primary-color);
+        }
+
+        .experience-item {
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid #eee;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .date {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .company {
+            font-weight: bold;
+        }
+
+        .position {
+            color: var(--primary-color);
+            font-weight: bold;}
+
+        .experience-details {
+            padding-left: var(--spacing-sm);
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .detail-item::before {
+            content: "■";
+            color: var(--primary-color);
+            margin-right: var(--spacing-xs);
+        }
+
+        .award-item {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .award-list {
+            list-style: none;
+        }
+
+        .award-list li {display: flex;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .award-list li::before {
+            content: "■";
+            color: var(--primary-color);
+            margin-right: var(--spacing-xs);
+        }
+
+        .certificate-list {
+            list-style: none;
+        }
+
+        .certificate-list li {
+            display: flex;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .certificate-list li::before {
+            content: "■";
+            color: var(--primary-color);
+            margin-right: var(--spacing-xs);
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            .resume-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {padding-bottom: var(--spacing-sm);
+            }
+
+            .self-assessment {
+                margin-top: var(--spacing-md);
+            }
+
+            .experience-header {
+                flex-direction: column;}
+
+            .date, .company, .position {margin-bottom: var(--spacing-xs);
+            }
+
+            .section-background {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-background span {
+                margin-top: var(--spacing-xs);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            .section-title, .content-section h3 {
+                font-size: 1rem;
+            }
+
+            .photo {
+                width: 120px;
+                height: 140px;}
+
+            .name-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 打印样式*/
+        @media print {
+            .resume-container {box-shadow: none;
+                max-width:100%;
+                margin: 0;
+            }
+            
+            body {
+                background-color: white;
+            }
+        }</style>
+</head>
+<body><div class="resume-container">
+        <!-- 左侧边栏 -->
+        <section class="sidebar">
+            <div class="photo-container">
+                <img src="./a1.jpg" alt="个人照片" class="photo">
+            </div>
+            
+            <h1 class="name-title">个人简历</h1>
+            
+            <div class="section-title">基础信息</div>
+            <ul class="info-list">
+                <li class="info-item">
+                    <i>👤</i> 姓名：梁子晔
+                </li><li class="info-item"><i>♀</i> 性别：女
+                </li>
+                <li class="info-item">
+                    <i>⏳</i> 年龄：24岁</li>
+                <li class="info-item">
+                    <i>🏛️</i> 政治面貌：中共党员
+                </li>
+            </ul><div class="section-title">联系方式</div>
+            <ul class="info-list">
+                <li class="info-item">    <i>📱</i>电话：183-0928-9248<!-- 隐去电话 -->
+                </li><li class="info-item"><i>📧</i>邮箱：liangziye@xdf.cn<!-- 隐去邮箱 -->
+                </li>
+                <li class="info-item">
+                    <i>💬</i> 微信：lzy666Tina <!--隐去微信 --></li>
+            </ul>
+            
+            <div class="self-assessment">
+                <div class="section-title">自我评价</div>
+                <p>拥有扎实的教学基础与高效的自主学习能力，注重计划性与目标管理。</p><p>课程组织与设计能力突出，善于调动学生积极性，创造良好互动氛围。</p>
+                <p>优秀的系统规划能力，善于沟通与表达，能够清晰传达教学内容。</p>
+                <p>卓越的组织协调能力，能高效管理课堂与教研活动。</p><p>责任心强，耐心细致，积极应对教学挑战，不断追求专业成长。</p><p>出色的时间管理能力，能同时处理多项教学任务与项目。</p>
+            </div>
+        </section>
+
+        <!-- 右侧内容区 -->
+        <section class="content">
+            <!-- 教育背景-->
+            <div class="content-section">
+                <div class="section-background">
+                    <h2>教育背景</h2>
+                    <span>Education</span></div>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="date">2019.09 -- 2023.06</span><span class="company">西安外国语大学</span>
+                        <span class="position">汉语国际教育/本科</span>
+                    </div>    <div class="experience-details">
+                        <p>专业排名：6/113</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 在校实习经历 -->
+            <div class="content-section">
+                <div class="section-background">
+                    <h2>工作经历</h2>
+                    <span>Experience</span>
+                </div>
+                <!-- 新增工作经历 -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="date">2023.06 -- 至今</span>
+                        <span class="company">新东方西安学校</span>
+                        <span class="position">分级阅读教师</span></div>
+                    <div class="experience-details"><div class="detail-item">负责分级阅读课程的教学与研发，提升学生阅读能力和英语综合素养</div>        <div class="detail-item">参与教研活动与团队建设，不断提升教学质量和专业水平</div>
+                        <div class="detail-item">多次在教学质检和评比中获得优异成绩，教学成果显著</div>
+                    </div>
+                </div>
+                
+                <!-- 精简旧工作经历 --><div class="experience-item">
+                    <div class="experience-header">
+                        <span class="date">2021.08 -- 2022.06</span><span class="company">某教育咨询公司</span>
+                        <span class="position">中文线上辅导教师</span>
+                    </div>    <div class="experience-details">
+                        <div class="detail-item">负责欧美大学汉语在线教学与质量管控</div>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="date">2020.08 -- 2021.06</span>
+                        <span class="company">某教育咨询公司</span>
+                        <span class="position">新媒体活动策划</span>    </div>
+                    <div class="experience-details">
+                        <div class="detail-item">负责社交媒体团队运营与活动策划</div>
+                    </div>
+                </div></div>
+
+            <!-- 在校工作经历-->
+            <div class="content-section">
+                <div class="section-background"><h2>在校经历</h2>
+                    <span>Practical</span></div>
+                <div class="experience-item"><div class="experience-header">
+                        <span class="date">2019.09 -- 2022.06</span><span class="company">校历史博物馆</span>
+                        <span class="position">副队长</span></div>
+                </div><div class="experience-item">
+                    <div class="experience-header">
+                        <span class="date">2021.06 -- 2022.06</span>        <span class="company">英语社团</span><span class="position">秘书处成员</span>
+                    </div></div></div>
+            <!--荣誉奖励 --><div class="content-section">
+                <div class="section-background">    <h2>荣誉奖励</h2>
+                    <span>Awards</span>
+                </div>
+                <ul class="award-list">    <li>2019-2022学年多次获得校级奖学金</li>
+                    <li>2023年06月，在FY24启明星教师暑假行课前教学质检中，荣获"A"级成绩</li>
+                    <li>2023年08月，顺利通过青少部分级阅读"雏鹰起飞"第二期训练营，考核表现优异</li>    <li>2023年09月，在FY24暑假教学工作中，荣获"良师益友"荣誉称号</li>
+                    <li>2023年12月，在FY24新教师寒假行课前教学质检中，荣获"良好"成绩</li>    <li>2024年01月，在FY24秋季分级阅读教研工作中，荣获"优秀教研团队"荣誉称号</li><li>2024年01月，通过KTK Module1、2、3共计9分</li>    <li>2024年03月，在FY24寒假教学防退工作中，荣获"运筹帷幄"荣誉称号</li>
+                    <li>2024年04月，在FY24全国教师功底考中，以排名前10%荣获"全国优秀教师"荣誉称号</li><li>2024年05月，荣获2024财年新东方西安学校校级年度"优秀新教师称号"</li><li>2024年09月，获新东方西安学校FY25第六届"星匠东方"教师赛课分级阅读项目第三名</li><li>2024年10月，荣获FY25新东方西安学校"星匠东方"赛课素养智学部"睿智口才奖"</li><li>2024年12月，在FY25年新东方西安学校寒假行课前教学质检中，荣获"A"级成绩</li><li>2025年01月，在FY25财年前两个季度客观数据评分，获校级半年度"优秀教师"</li>    <li>2025年03月，获分级阅读项目教研组"最佳课程设计奖"</li></ul></div>
+            <!--技能证书 -->
+            <div class="content-section">
+                <div class="section-background">
+                    <h2>技能证书</h2>    <span>Certificate</span>
+                </div>
+                <ul class="certificate-list">
+                    <li>大学英语四级(CET4)、大学英语六级(CET6)证书</li><li>大学英语专业八级(TEM8)证书 - 英语专业最高等级考试</li><li>TKT证书(教学知识认证)</li>    <li>KTK Module1、2、3国际认证</li>    <li>普通话证书(二级甲等)</li>
+                </ul></div></section>
+    </div>
+</body>
+</html>
